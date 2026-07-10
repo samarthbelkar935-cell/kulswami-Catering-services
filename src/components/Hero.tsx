@@ -161,7 +161,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 1.4 }}
           className="text-zinc-400 font-semibold tracking-[0.3em] text-xs md:text-sm uppercase mb-6"
         >
-          Aurangabad – [PIN CODE], Maharashtra, India
+          Aurangabad – 431001, Maharashtra, India
         </motion.p>
 
         {/* Subtitle / Description */}

@@ -128,20 +128,26 @@ export default function Testimonials() {
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-semibold uppercase tracking-widest text-gold bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <motion.span variants={itemVariants} className="text-xs font-semibold uppercase tracking-widest text-gold bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
             Client Gratitude
-          </span>
-          <p className="font-script text-gold text-3xl md:text-4xl mt-4 font-normal leading-none">Voices of Delighted Hosts</p>
-          <h2 className="text-3xl md:text-5xl font-serif text-white font-bold tracking-tight mt-2 mb-6">
+          </motion.span>
+          <motion.p variants={itemVariants} className="font-script text-gold text-3xl md:text-4xl mt-4 font-normal leading-none">Voices of Delighted Hosts</motion.p>
+          <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl font-serif text-white font-bold tracking-tight mt-2 mb-6">
             Words of Appreciation & <span className="text-gold italic font-medium">Memorable Reviews</span>
-          </h2>
-          <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-zinc-400 text-sm md:text-base leading-relaxed">
             Discover why prestigious families and corporate organizations across <strong className="text-white font-semibold">Aurangabad, Maharashtra</strong> trust Kulswami to design their grand banquet feasts.
-          </p>
+          </motion.p>
 
           {/* Filtering Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-10 p-1 bg-[#121212] rounded-xl border border-zinc-800/80 inline-flex max-w-full">
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-2 mt-10 p-1 bg-[#121212] rounded-xl border border-zinc-800/80 inline-flex max-w-full">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
@@ -155,11 +161,12 @@ export default function Testimonials() {
                 {cat.label}
               </button>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Testimonials Grid */}
         <motion.div 
+          key={selectedCategory}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

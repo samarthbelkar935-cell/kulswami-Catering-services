@@ -12,6 +12,7 @@ export interface ServiceItem {
   description: string;
   features: string[];
   image: string;
+  category: "Weddings" | "Corporate" | "Traditional";
 }
 
 export const MENU_CATEGORIES = [
@@ -149,7 +150,8 @@ export const SERVICES: ServiceItem[] = [
       "Signature welcome drinks and live mocktail stations",
       "Dedicated hospitality staff"
     ],
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+    category: "Weddings"
   },
   {
     id: "engagements",
@@ -161,7 +163,8 @@ export const SERVICES: ServiceItem[] = [
       "Theme-based dessert layouts",
       "Strict hygiene standards"
     ],
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800",
+    category: "Traditional"
   },
   {
     id: "corporate",
@@ -173,7 +176,8 @@ export const SERVICES: ServiceItem[] = [
       "Professional and formal presentation",
       "High-grade disposable and premium cutlery options"
     ],
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800",
+    category: "Corporate"
   },
   {
     id: "celebrations",
@@ -185,7 +189,8 @@ export const SERVICES: ServiceItem[] = [
       "Elegant house-warming custom menus",
       "Warm, personalized hospitality"
     ],
-    image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=800",
+    category: "Traditional"
   }
 ];
 

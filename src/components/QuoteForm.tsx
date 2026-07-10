@@ -1,6 +1,36 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, CheckCircle, Calendar, Users, Send, MapPin, Sparkles } from "lucide-react";
+import { MessageCircle, CheckCircle, Calendar, Users, Send, MapPin, Sparkles, Navigation } from "lucide-react";
+
+const FAMOUS_VENUES = [
+  // Lawns & Banquets
+  { name: "Saraswati Lawns", area: "Beed Bypass", type: "Marriage Lawn" },
+  { name: "Kalash Mangal Karyalaya", area: "Garkheda", type: "Banquet Hall" },
+  { name: "MGM Sports Club Lawn", area: "N-6, CIDCO", type: "Premium Lawn" },
+  { name: "Ambika Lawns", area: "Beed Bypass", type: "Marriage Lawn" },
+  { name: "Pankaj Mangal Karyalaya", area: "CIDCO", type: "Banquet Hall" },
+  { name: "Chhatrapati Shahu Maharaj Sabhagruh", area: "Shahnoorwadi", type: "Auditorium Hall" },
+  { name: "Rama International Banquet", area: "Jalna Road", type: "Luxury Hotel Venue" },
+  { name: "Deogiri Valley Lawns", area: "Daulatabad Road", type: "Scenic Lawn" },
+  { name: "Grand Kailash Lawn", area: "Jalna Road", type: "Premium Lawn" },
+  { name: "President Park Banquet & Lawn", area: "Jalna Road", type: "Luxury Hotel Venue" },
+  { name: "Shehnai Mangal Karyalaya", area: "CIDCO", type: "Traditional Hall" },
+  { name: "Vrindavan Lawns", area: "Garkheda", type: "Marriage Lawn" },
+  { name: "Siddharth Garden Lawns", area: "Station Road", type: "Public Event Lawn" },
+  { name: "Chikalthana Community Hall", area: "Chikalthana", type: "Community Hall" },
+  
+  // Neighborhoods/Areas
+  { name: "CIDCO Area", area: "Aurangabad", type: "Local Neighborhood" },
+  { name: "Garkheda Parisar", area: "Aurangabad", type: "Local Neighborhood" },
+  { name: "Beed Bypass Road", area: "Aurangabad", type: "Local Neighborhood" },
+  { name: "Nirala Bazar", area: "Aurangabad", type: "Premium Business Area" },
+  { name: "Osmanpura", area: "Aurangabad", type: "Residential Area" },
+  { name: "Samarth Nagar", area: "Aurangabad", type: "Residential Area" },
+  { name: "Kranti Chowk Area", area: "Aurangabad", type: "Central Hub" },
+  { name: "Satara Parisar", area: "Aurangabad", type: "Developing Area" },
+  { name: "Aurangpura", area: "Aurangabad", type: "Heritage Town Area" },
+  { name: "Shahgunj", area: "Aurangabad", type: "Old City Area" }
+];
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
@@ -10,11 +40,14 @@ export default function QuoteForm() {
     guests: "150",
     date: "",
     notes: "",
+    venueLocation: "",
     consent: true
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [validationError, setValidationError] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestions, setSuggestions] = useState(FAMOUS_VENUES);
 
   const eventTypes = [
     "Wedding",
@@ -32,6 +65,35 @@ export default function QuoteForm() {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      venueLocation: value
+    }));
+
+    if (!value.trim()) {
+      setSuggestions(FAMOUS_VENUES);
+    } else {
+      const query = value.toLowerCase();
+      const filtered = FAMOUS_VENUES.filter((item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.area.toLowerCase().includes(query) ||
+        item.type.toLowerCase().includes(query)
+      );
+      setSuggestions(filtered);
+    }
+    setShowSuggestions(true);
+  };
+
+  const handleSelectSuggestion = (name: string, area: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      venueLocation: `${name}, ${area}`
+    }));
+    setShowSuggestions(false);
   };
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +117,18 @@ export default function QuoteForm() {
       setValidationError("Please enter a valid 10-digit mobile number.");
       return;
     }
+
+    // Guest Count Validation
+    const guestCount = parseInt(formData.guests, 10);
+    if (isNaN(guestCount) || guestCount < 10) {
+      setValidationError("Minimum catering size is 10 guests. Please specify an event size of 10 or more.");
+      return;
+    }
+    if (guestCount > 25000) {
+      setValidationError("For mega catering events over 25,000 guests, please call us directly for special bulk logistics.");
+      return;
+    }
+
     if (!formData.date) {
       setValidationError("Please select your event date.");
       return;
@@ -63,6 +137,10 @@ export default function QuoteForm() {
     setIsSubmitted(true);
 
     // Generate Pre-filled WhatsApp Link for Seamless Dispatch
+    const locationStr = formData.venueLocation.trim() 
+      ? `${formData.venueLocation}, Aurangabad, MH, India`
+      : "Aurangabad, Maharashtra, India";
+
     const messageText = `*Kulswami Catering Quote Request*
 ---------------------------------------------
 *Client Name:* ${formData.name}
@@ -70,7 +148,7 @@ export default function QuoteForm() {
 *Event Category:* ${formData.eventType}
 *Expected Guests:* ${formData.guests}
 *Event Date:* ${formData.date}
-*Event Location:* Aurangabad – [PIN CODE], Maharashtra, India
+*Event Location:* ${locationStr}
 *Menu / Custom Notes:* ${formData.notes || "Standard curated menu options preferred."}
 ---------------------------------------------
 Please provide us a personalized budget range based on our event requirements. Thank you!`;
@@ -84,11 +162,25 @@ Please provide us a personalized budget range based on our event requirements. T
   };
 
   const handleQuickWhatsAppInquiry = () => {
+    // Guest Count Validation
+    const guestCount = parseInt(formData.guests, 10);
+    if (isNaN(guestCount) || guestCount < 10) {
+      setValidationError("Minimum catering size is 10 guests. Please enter 10 or more expected guests.");
+      return;
+    }
+    if (guestCount > 25000) {
+      setValidationError("For mega catering events over 25,000 guests, please contact us directly.");
+      return;
+    }
+
     const nameStr = formData.name.trim() ? formData.name : "Valued Guest";
     const dateStr = formData.date ? formData.date : "(Date to be specified)";
     const eventTypeStr = formData.eventType;
     const guestsStr = formData.guests;
     const notesStr = formData.notes.trim() ? formData.notes : "Standard curated menu options preferred.";
+    const locationStr = formData.venueLocation.trim()
+      ? `${formData.venueLocation}, Aurangabad, MH`
+      : "Aurangabad, Maharashtra, India";
 
     const messageText = `*Kulswami Catering Quick Inquiry*
 ---------------------------------------------
@@ -96,7 +188,7 @@ Please provide us a personalized budget range based on our event requirements. T
 *Event Category:* ${eventTypeStr}
 *Expected Guests:* ${guestsStr}
 *Event Date:* ${dateStr}
-*Event Location:* Aurangabad, Maharashtra, India
+*Event Location:* ${locationStr}
 *Menu Notes:* ${notesStr}
 ---------------------------------------------
 I would like to discuss my catering options directly with you. Please guide me!`;
@@ -211,18 +303,16 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       <Users className="w-3.5 h-3.5 text-gold" />
                       <span>Expected Guests</span>
                     </label>
-                    <select
+                    <input
+                      required
+                      type="number"
                       name="guests"
+                      min="10"
                       value={formData.guests}
                       onChange={handleInputChange}
+                      placeholder="e.g. 150 (Min. 10)"
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
-                    >
-                      <option value="50-100">50 to 100 guests</option>
-                      <option value="100-250">100 to 250 guests</option>
-                      <option value="250-500">250 to 500 guests</option>
-                      <option value="500-1000">500 to 1000 guests</option>
-                      <option value="1000+">1000+ guests (Grand Banquet)</option>
-                    </select>
+                    />
                   </div>
                 </div>
 
@@ -243,17 +333,60 @@ I would like to discuss my catering options directly with you. Please guide me!`
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 relative">
                     <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-gold" />
-                      <span>Service Location</span>
+                      <span>Preferred Venue / Location</span>
                     </label>
-                    <input
-                      disabled
-                      type="text"
-                      value="Aurangabad – [PIN CODE], Maharashtra, India"
-                      className="w-full bg-zinc-900 border border-zinc-800 text-zinc-400 rounded-xl px-4 py-3 text-sm cursor-not-allowed font-medium"
-                    />
+                    <div className="relative">
+                      <input
+                        required
+                        type="text"
+                        name="venueLocation"
+                        value={formData.venueLocation}
+                        onChange={handleLocationChange}
+                        onFocus={() => setShowSuggestions(true)}
+                        onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                        placeholder="e.g. Saraswati Lawns, CIDCO, etc."
+                        className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                      />
+                      
+                      {/* Address Autocomplete Dropdown List */}
+                      <AnimatePresence>
+                        {showSuggestions && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 5 }}
+                            className="absolute left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl z-50 scrollbar-thin scrollbar-thumb-zinc-800"
+                          >
+                            {suggestions.length > 0 ? (
+                              suggestions.map((item, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onMouseDown={() => handleSelectSuggestion(item.name, item.area)}
+                                  className="w-full text-left px-4 py-3 hover:bg-zinc-900 flex items-start gap-3 border-b border-zinc-900/60 last:border-0 transition-colors"
+                                >
+                                  <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                                  <div className="flex-1 min-w-0">
+                                    <div className="text-xs font-semibold text-white truncate">{item.name}</div>
+                                    <div className="text-[10px] text-zinc-400 flex items-center gap-1.5 mt-0.5">
+                                      <span>{item.area}, Aurangabad</span>
+                                      <span className="text-gold/80 bg-gold/5 px-1.5 py-0.5 rounded text-[8px] uppercase font-bold tracking-wider shrink-0">{item.type}</span>
+                                    </div>
+                                  </div>
+                                </button>
+                              ))
+                            ) : (
+                              <div className="px-4 py-3 text-xs text-zinc-500 italic">
+                                Keep typing to specify your custom address...
+                              </div>
+                            )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
                 </div>
 
@@ -349,7 +482,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                 <div className="pt-8">
                   <a
                     href={`https://wa.me/919665492983?text=${encodeURIComponent(
-                      `*Kulswami Catering Quote Request* \n*Client Name:* ${formData.name}\n*Event:* ${formData.eventType}\n*Guests:* ${formData.guests}\n*Date:* ${formData.date}\n*Location:* Aurangabad – [PIN CODE], Maharashtra, India\nPlease provide us a custom budget range.`
+                      `*Kulswami Catering Quote Request*\n*Client Name:* ${formData.name}\n*Event:* ${formData.eventType}\n*Guests:* ${formData.guests}\n*Date:* ${formData.date}\n*Location:* ${formData.venueLocation.trim() ? `${formData.venueLocation}, Aurangabad, MH` : "Aurangabad, Maharashtra, India"}\nPlease provide us a custom budget range.`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

@@ -42,7 +42,7 @@ export default function Contact() {
                 <div>
                   <h4 className="text-sm font-bold text-white uppercase tracking-wide">Catering Service Area</h4>
                   <p className="text-zinc-300 text-sm font-light mt-0.5">
-                    Aurangabad – [PIN CODE], Maharashtra, India
+                    Aurangabad – 431001, Maharashtra, India
                   </p>
                   <p className="text-xs text-zinc-500 mt-0.5">Strictly limited to Aurangabad city regions.</p>
                 </div>

@@ -1,6 +1,29 @@
 import { motion } from "motion/react";
 import { CheckCircle2, Flame, Star, Compass } from "lucide-react";
 
+// Framer motion staggered variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 1, 0.5, 1], // premium easeOutQuart
+    },
+  },
+};
+
 export default function About() {
   const highlights = [
     "Centuries-old secret spices blended in-house for traditional curries",
@@ -17,13 +40,13 @@ export default function About() {
           
           {/* Images Grid */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-5 grid grid-cols-2 gap-4"
           >
-            <div className="space-y-4">
+            <motion.div variants={itemVariants} className="space-y-4">
               <motion.div 
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
@@ -43,9 +66,9 @@ export default function About() {
                   <p className="text-xs text-zinc-400 mt-1">Preserving traditional flavors via ancestral methods.</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4 pt-8">
+            <motion.div variants={itemVariants} className="space-y-4 pt-8">
               <div className="bg-[#181817] text-white rounded-2xl p-6 flex flex-col justify-between h-40 md:h-48 border border-gold/10 shadow-xl">
                 <Compass className="w-8 h-8 text-gold" />
                 <div>
@@ -65,18 +88,18 @@ export default function About() {
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* About Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
             className="lg:col-span-7 space-y-6"
           >
-            <div>
+            <motion.div variants={itemVariants}>
               <span className="text-xs font-semibold uppercase tracking-widest text-gold bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
                 Our Story & Promise
               </span>
@@ -84,27 +107,28 @@ export default function About() {
               <h2 className="text-3xl md:text-5xl font-serif text-white font-bold tracking-tight mt-2 leading-tight">
                 An Absolute Legacy of <span className="text-gold italic">Exquisite Taste</span>
               </h2>
-            </div>
+            </motion.div>
 
-            <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-              Founded in <strong className="text-white font-semibold">Aurangabad – [PIN CODE], Maharashtra, India</strong>, Kulswami Catering Services has built a stellar reputation based on quality, integrity, and rich taste. We believe that fine food is the soul of any happy celebration, and we are dedicated to making every event an extraordinary gastronomic journey.
-            </p>
-            <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+            <motion.p variants={itemVariants} className="text-zinc-400 text-sm md:text-base leading-relaxed">
+              Founded in <strong className="text-white font-semibold">Aurangabad – 431001, Maharashtra, India</strong>, Kulswami Catering Services has built a stellar reputation based on quality, integrity, and rich taste. We believe that fine food is the soul of any happy celebration, and we are dedicated to making every event an extraordinary gastronomic journey.
+            </motion.p>
+            <motion.p variants={itemVariants} className="text-zinc-400 text-sm md:text-base leading-relaxed">
               Whether you are planning a grand royal wedding for thousands of guests or an intimate family celebration at home, our meticulous attention to detail ensures that the preparation, presentation, and service are nothing short of perfect.
-            </p>
+            </motion.p>
 
             {/* List of Highlights */}
-            <div className="space-y-3.5 pt-2">
+            <motion.div variants={containerVariants} className="space-y-3.5 pt-2">
               {highlights.map((item, index) => (
-                <div key={index} className="flex items-start gap-3">
+                <motion.div key={index} variants={itemVariants} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                   <span className="text-zinc-200 text-sm md:text-base font-light">{item}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Micro-interactive Review Callout */}
             <motion.div
+              variants={itemVariants}
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
               className="bg-[#121212] rounded-xl p-5 shadow-2xl border border-zinc-800/80 flex items-center gap-4 mt-6"

@@ -25,7 +25,7 @@ export default function Footer() {
               Kulswami <span className="text-gold">Catering Services</span>
             </h3>
             <p className="text-xs text-zinc-500 font-medium tracking-wide">
-              Aurangabad – [PIN CODE], Maharashtra, India
+              Aurangabad – 431001, Maharashtra, India
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export default function Footer() {
           {/* Location limit warning */}
           <div className="text-center md:text-left tracking-wider">
             <span>Servicing Exclusively in: </span>
-            <strong className="text-zinc-400 font-bold">Aurangabad – [PIN CODE], Maharashtra, India</strong>
+            <strong className="text-zinc-400 font-bold">Aurangabad – 431001, Maharashtra, India</strong>
           </div>
 
           {/* Copyright + Privacy + WhatsApp quick link */}

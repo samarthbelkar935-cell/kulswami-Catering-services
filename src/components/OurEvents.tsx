@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Camera, Sparkles, Maximize2, MapPin, Calendar, Heart, X, ArrowUpRight } from "lucide-react";
+import { Camera, Sparkles, Maximize2, MapPin, Calendar, Heart, X, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface EventImage {
   id: number;
@@ -101,6 +101,41 @@ export default function OurEvents() {
   const filteredEvents = EVENT_GALLERY.filter(
     (item) => selectedFilter === "All" || item.category === selectedFilter
   );
+
+  const handleNextImage = () => {
+    if (!activeImage) return;
+    const currentIndex = filteredEvents.findIndex((img) => img.id === activeImage.id);
+    if (currentIndex === -1) return;
+    const nextIndex = (currentIndex + 1) % filteredEvents.length;
+    setActiveImage(filteredEvents[nextIndex]);
+  };
+
+  const handlePrevImage = () => {
+    if (!activeImage) return;
+    const currentIndex = filteredEvents.findIndex((img) => img.id === activeImage.id);
+    if (currentIndex === -1) return;
+    const prevIndex = (currentIndex - 1 + filteredEvents.length) % filteredEvents.length;
+    setActiveImage(filteredEvents[prevIndex]);
+  };
+
+  useEffect(() => {
+    if (!activeImage) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        handleNextImage();
+      } else if (e.key === "ArrowLeft") {
+        handlePrevImage();
+      } else if (e.key === "Escape") {
+        setActiveImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeImage, filteredEvents]);
 
   const handleScrollToQuote = () => {
     const element = document.getElementById("quote-section");
@@ -267,13 +302,38 @@ export default function OurEvents() {
               className="fixed inset-0 bg-black/95 backdrop-blur-md"
             />
 
+            {/* Left Arrow Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevImage();
+              }}
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 text-zinc-400 hover:text-white p-2.5 md:p-3 bg-black/65 hover:bg-black/90 rounded-full border border-zinc-800/80 hover:border-gold/50 transition-all cursor-pointer shadow-2xl flex items-center justify-center group"
+              aria-label="Previous Image"
+            >
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-zinc-400 group-hover:text-gold transition-colors" />
+            </button>
+
+            {/* Right Arrow Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNextImage();
+              }}
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 text-zinc-400 hover:text-white p-2.5 md:p-3 bg-black/65 hover:bg-black/90 rounded-full border border-zinc-800/80 hover:border-gold/50 transition-all cursor-pointer shadow-2xl flex items-center justify-center group"
+              aria-label="Next Image"
+            >
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-zinc-400 group-hover:text-gold transition-colors" />
+            </button>
+
             {/* Modal Container */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 180 }}
-              className="bg-[#121212] border border-zinc-800 rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative z-10"
+              className="bg-[#121212] border border-zinc-800 rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative z-10 mx-10"
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
@@ -284,15 +344,22 @@ export default function OurEvents() {
                 <X className="w-5 h-5" />
               </button>
 
-              {/* Main Image */}
-              <div className="h-[400px] md:h-[480px] bg-black relative">
-                <img
-                  src={activeImage.imageUrl}
-                  alt={activeImage.title}
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#121212] via-[#121212]/30 to-transparent p-6 pt-12" />
+              {/* Main Image with Cross-fade transition */}
+              <div className="h-[300px] sm:h-[400px] md:h-[480px] bg-black relative overflow-hidden">
+                <AnimatePresence mode="popLayout">
+                  <motion.img
+                    key={activeImage.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    src={activeImage.imageUrl}
+                    alt={activeImage.title}
+                    className="w-full h-full object-cover absolute inset-0"
+                    referrerPolicy="no-referrer"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#121212] via-[#121212]/30 to-transparent p-6 pt-12 z-10" />
               </div>
 
               {/* Details Pane */}

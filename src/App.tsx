@@ -80,7 +80,7 @@ export default function App() {
         <span className="hidden sm:inline text-zinc-800">|</span>
         <span className="flex items-center gap-1.5 justify-center">
           <MapPin className="w-3.5 h-3.5 text-gold" />
-          <span>Exclusively servicing: <strong className="text-white">Aurangabad – [PIN CODE], MH</strong></span>
+          <span>Exclusively servicing: <strong className="text-white">Aurangabad – 431001, MH</strong></span>
         </span>
         <span className="hidden sm:inline text-zinc-800">|</span>
         <span className="flex items-center gap-1.5 justify-center">
