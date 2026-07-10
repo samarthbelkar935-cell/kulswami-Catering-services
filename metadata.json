@@ -1,0 +1,6 @@
+{
+  "name": "Kulswami Catering Services",
+  "description": "Premium catering services in Aurangabad, Maharashtra, specializing in delicious traditional and modern cuisines with exquisite presentation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
