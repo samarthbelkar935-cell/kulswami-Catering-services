@@ -198,7 +198,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
   };
 
   return (
-    <section id="quote-section" className="py-24 px-4 md:px-8 bg-[#0a0a09] text-white overflow-hidden relative">
+    <section id="quote-section" className="py-24 px-4 md:px-8 bg-[#FAF7F2] text-stone-900 overflow-hidden relative border-b border-stone-200/40">
       {/* Decorative Blur Background Element */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
@@ -211,16 +211,16 @@ I would like to discuss my catering options directly with you. Please guide me!`
             Instant Inquiry
           </span>
           <p className="font-script text-gold text-3xl md:text-4xl mt-4 font-normal leading-none">We craft memories, not just menus</p>
-          <h2 className="text-3xl md:text-5xl font-serif text-amber-50 font-bold tracking-tight mt-2 mb-6">
+          <h2 className="text-3xl md:text-5xl font-serif text-stone-900 font-bold tracking-tight mt-2 mb-6">
             Plan Your <span className="text-gold italic">Culinary Feast</span>
           </h2>
-          <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+          <p className="text-stone-600 text-sm md:text-base leading-relaxed font-light">
             Submit your event details below to design a personalized menu. Based on your guest count and dish selection, we will formulate a customized <strong className="text-gold font-semibold">budget range</strong> and reach out to you directly via WhatsApp.
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-zinc-900 border border-zinc-800/80 rounded-3xl p-6 md:p-12 shadow-2xl relative">
+        <div className="bg-ivory border border-stone-200 rounded-3xl p-6 md:p-12 shadow-md relative">
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
               /* FORM STATE */
@@ -238,7 +238,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-red-950/40 border border-red-500/30 rounded-xl text-red-400 text-xs font-semibold"
+                    className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-xs font-semibold"
                   >
                     {validationError}
                   </motion.div>
@@ -247,7 +247,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                 {/* Grid Inputs (Name & Phone) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
                       Your Full Name
                     </label>
                     <input
@@ -257,12 +257,12 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="e.g. Ramesh Kulkarni"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                      className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
                       WhatsApp Contact Number
                     </label>
                     <input
@@ -272,7 +272,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       value={formData.whatsapp}
                       onChange={handleInputChange}
                       placeholder="e.g. 9665492983"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                      className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
                     />
                   </div>
                 </div>
@@ -280,7 +280,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                 {/* Grid Inputs (Event Type & Guest Count) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-gold" />
                       <span>Event Category</span>
                     </label>
@@ -288,10 +288,10 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       name="eventType"
                       value={formData.eventType}
                       onChange={handleInputChange}
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                      className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
                     >
                       {eventTypes.map((type) => (
-                        <option key={type} value={type} className="bg-zinc-905 text-white">
+                        <option key={type} value={type} className="bg-white text-stone-900">
                           {type}
                         </option>
                       ))}
@@ -299,7 +299,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-gold" />
                       <span>Expected Guests</span>
                     </label>
@@ -311,7 +311,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       value={formData.guests}
                       onChange={handleInputChange}
                       placeholder="e.g. 150 (Min. 10)"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                      className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
                     />
                   </div>
                 </div>
@@ -319,7 +319,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                 {/* Grid Inputs (Date & Location Notice) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-gold" />
                       <span>Event Date</span>
                     </label>
@@ -329,12 +329,12 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       name="date"
                       value={formData.date}
                       onChange={handleInputChange}
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                      className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold text-stone-700"
                     />
                   </div>
 
                   <div className="space-y-2 relative">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-gold" />
                       <span>Preferred Venue / Location</span>
                     </label>
@@ -348,7 +348,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                         onFocus={() => setShowSuggestions(true)}
                         onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                         placeholder="e.g. Saraswati Lawns, CIDCO, etc."
-                        className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
+                        className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold"
                       />
                       
                       {/* Address Autocomplete Dropdown List */}
@@ -358,7 +358,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 5 }}
-                            className="absolute left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl z-50 scrollbar-thin scrollbar-thumb-zinc-800"
+                            className="absolute left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border border-stone-200 rounded-xl shadow-2xl z-50 scrollbar-thin scrollbar-thumb-stone-200"
                           >
                             {suggestions.length > 0 ? (
                               suggestions.map((item, idx) => (
@@ -366,12 +366,12 @@ I would like to discuss my catering options directly with you. Please guide me!`
                                   key={idx}
                                   type="button"
                                   onMouseDown={() => handleSelectSuggestion(item.name, item.area)}
-                                  className="w-full text-left px-4 py-3 hover:bg-zinc-900 flex items-start gap-3 border-b border-zinc-900/60 last:border-0 transition-colors"
+                                  className="w-full text-left px-4 py-3 hover:bg-stone-50 flex items-start gap-3 border-b border-stone-100 last:border-0 transition-colors"
                                 >
                                   <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
                                   <div className="flex-1 min-w-0">
-                                    <div className="text-xs font-semibold text-white truncate">{item.name}</div>
-                                    <div className="text-[10px] text-zinc-400 flex items-center gap-1.5 mt-0.5">
+                                    <div className="text-xs font-semibold text-stone-900 truncate">{item.name}</div>
+                                    <div className="text-[10px] text-stone-500 flex items-center gap-1.5 mt-0.5">
                                       <span>{item.area}, Aurangabad</span>
                                       <span className="text-gold/80 bg-gold/5 px-1.5 py-0.5 rounded text-[8px] uppercase font-bold tracking-wider shrink-0">{item.type}</span>
                                     </div>
@@ -379,7 +379,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                                 </button>
                               ))
                             ) : (
-                              <div className="px-4 py-3 text-xs text-zinc-500 italic">
+                              <div className="px-4 py-3 text-xs text-stone-400 italic">
                                 Keep typing to specify your custom address...
                               </div>
                             )}
@@ -392,7 +392,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
 
                 {/* Custom Notes / Menu Preference */}
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
                     Menu Preferences & Special Instructions
                   </label>
                   <textarea
@@ -401,7 +401,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                     value={formData.notes}
                     onChange={handleInputChange}
                     placeholder="Describe your preferred dishes (e.g. traditional Maharashtrian pangat with Puran Poli, live South Indian appam counters, specific sweet priorities, etc.)."
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold resize-none"
+                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold resize-none"
                   />
                 </div>
 
@@ -417,20 +417,20 @@ I would like to discuss my catering options directly with you. Please guide me!`
                       onChange={handleCheckboxChange}
                       className="mt-1 w-4 h-4 rounded accent-gold focus:ring-gold"
                     />
-                    <label htmlFor="consent" className="text-xs text-zinc-400 leading-relaxed cursor-pointer select-none">
+                    <label htmlFor="consent" className="text-xs text-stone-500 leading-relaxed cursor-pointer select-none">
                       I understand that Kulswami Catering Services will generate a tailored <strong className="text-gold">budget range</strong> based on this custom inquiry and dispatch it directly via WhatsApp. No fixed prices or ₹ estimates are displayed here.
                     </label>
                   </div>
                 </div>
 
                 {/* Submit button & Quick Inquiry Button */}
-                <div className="pt-4 border-t border-zinc-850 flex flex-col sm:flex-row items-center gap-4">
+                <div className="pt-4 border-t border-stone-100 flex flex-col sm:flex-row items-center gap-4">
                   <motion.button
                     type="submit"
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     transition={{ type: "tween", duration: 0.15 }}
-                    className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2.5 bg-gold hover:bg-gold-dark text-white font-bold px-6 py-4 rounded-xl text-xs uppercase tracking-widest shadow-xl shadow-gold/5 transition-colors cursor-pointer"
+                    className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2.5 bg-gold hover:bg-gold-dark text-white font-bold px-6 py-4 rounded-xl text-xs uppercase tracking-widest shadow-md transition-colors cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
                     <span>Submit & Request Quote</span>
@@ -442,7 +442,7 @@ I would like to discuss my catering options directly with you. Please guide me!`
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     transition={{ type: "tween", duration: 0.15 }}
-                    className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-4 rounded-xl text-xs uppercase tracking-widest shadow-xl shadow-emerald-900/10 transition-colors cursor-pointer border border-emerald-500/20"
+                    className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-4 rounded-xl text-xs uppercase tracking-widest shadow-md transition-colors cursor-pointer border border-emerald-500/10"
                   >
                     <MessageCircle className="w-4 h-4 fill-current" />
                     <span>Quick WhatsApp Inquiry</span>
@@ -458,22 +458,22 @@ I would like to discuss my catering options directly with you. Please guide me!`
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}
                 className="text-center py-12 md:py-16 space-y-6"
               >
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto shadow-inner">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
                   <CheckCircle className="w-8 h-8 fill-current" />
                 </div>
                 
-                <h3 className="font-serif font-bold text-2xl md:text-4xl text-amber-50">
+                <h3 className="font-serif font-bold text-2xl md:text-4xl text-stone-900">
                   Inquiry Successfully Compiled!
                 </h3>
                 
                 <div className="max-w-md mx-auto space-y-4">
-                  <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-                    Thank you, <strong className="text-white">{formData.name}</strong>. Your custom inquiry details for your upcoming <strong className="text-white">{formData.eventType}</strong> on <strong className="text-white">{formData.date}</strong> have been saved.
+                  <p className="text-stone-700 text-sm md:text-base leading-relaxed">
+                    Thank you, <strong className="text-stone-950 font-semibold">{formData.name}</strong>. Your custom inquiry details for your upcoming <strong className="text-stone-950 font-semibold">{formData.eventType}</strong> on <strong className="text-stone-950 font-semibold">{formData.date}</strong> have been saved.
                   </p>
-                  <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                  <p className="text-stone-500 text-xs md:text-sm leading-relaxed">
                     Our team is currently calculating your personalized <strong className="text-gold font-semibold">budget range</strong> based on your selections. 
                   </p>
-                  <p className="text-emerald-400 text-xs md:text-sm font-semibold flex items-center justify-center gap-2">
+                  <p className="text-emerald-600 text-xs md:text-sm font-semibold flex items-center justify-center gap-2">
                     <MessageCircle className="w-4 h-4 fill-current" />
                     <span>Now redirecting you safely to WhatsApp to initiate the final quote conversation...</span>
                   </p>

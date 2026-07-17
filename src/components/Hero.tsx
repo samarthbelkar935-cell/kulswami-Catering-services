@@ -29,8 +29,8 @@ const letterVariants = {
 export default function Hero() {
   const { scrollY } = useScroll();
   // Subtle premium parallax shift & scale of the background image
-  const backgroundY = useTransform(scrollY, [0, 800], [0, 150]);
-  const backgroundScale = useTransform(scrollY, [0, 800], [1.05, 1.18]);
+  const backgroundY = useTransform(scrollY, [0, 1000], [0, -180]);
+  const backgroundScale = useTransform(scrollY, [0, 1000], [1.1, 1.25]);
 
   const handleScrollToQuote = () => {
     const element = document.getElementById("quote-section");
@@ -50,20 +50,20 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-[95vh] flex items-center justify-center bg-[#0a0a09] text-white overflow-hidden py-24 px-4 md:px-8">
+    <section className="relative min-h-[95vh] flex items-center justify-center bg-[#FCFBF7] text-stone-900 overflow-hidden py-24 px-4 md:px-8">
       {/* Chalkboard Slate Textured Background Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
           src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1600"
           alt="Catering Service Background"
           style={{ y: backgroundY, scale: backgroundScale }}
-          className="w-full h-full object-cover opacity-10 mix-blend-overlay filter grayscale"
+          className="w-full h-full object-cover opacity-[0.07] mix-blend-multiply filter saturate-[0.25] contrast-[1.1]"
           referrerPolicy="no-referrer"
         />
         {/* Subtle dark radial vignette */}
-        <div className="absolute inset-0 bg-radial-[circle_at_center,_transparent_10%,_#0a0a09_85%]" />
+        <div className="absolute inset-0 bg-radial-[circle_at_center,_transparent_10%,_#FCFBF7_85%]" />
         {/* Ambient gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a09] via-transparent to-[#0a0a09]/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FCFBF7] via-transparent to-[#FCFBF7]/50" />
       </div>
 
       {/* Interactive Floating Spices and Leaves (Mimics the beautiful reference image) */}
@@ -128,7 +128,7 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-4xl md:text-6xl lg:text-8xl font-serif text-white font-bold tracking-tight mb-6 leading-tight drop-shadow-md flex flex-wrap justify-center"
+          className="text-4xl md:text-6xl lg:text-8xl font-serif text-stone-900 font-bold tracking-tight mb-6 leading-tight drop-shadow-sm flex flex-wrap justify-center"
         >
           <span className="inline-block mr-[0.25em] whitespace-nowrap">
             {"Kulswami".split("").map((char, index) => (
@@ -159,7 +159,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.4 }}
-          className="text-zinc-400 font-semibold tracking-[0.3em] text-xs md:text-sm uppercase mb-6"
+          className="text-stone-500 font-semibold tracking-[0.3em] text-xs md:text-sm uppercase mb-6"
         >
           Aurangabad – 431001, Maharashtra, India
         </motion.p>
@@ -169,7 +169,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.6 }}
-          className="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light"
+          className="text-stone-650 text-sm md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light"
         >
           Elevating Aurangabad's grandest celebrations through authentic spices, handpicked premium ingredients, and flawless vegetarian banquet styling.
         </motion.p>
@@ -189,7 +189,7 @@ export default function Hero() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "tween", duration: 0.2 }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg shadow-xl shadow-emerald-950/20 transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg shadow-xl shadow-emerald-950/10 transition-colors"
           >
             <MessageCircle className="w-5 h-5 fill-current" />
             <span className="text-xs uppercase tracking-widest">Connect on WhatsApp</span>
@@ -201,7 +201,7 @@ export default function Hero() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "tween", duration: 0.2 }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#121212] hover:bg-gold text-amber-50 hover:text-[#0a0a09] font-semibold px-8 py-4 rounded-lg border border-zinc-800 transition-colors shadow-lg"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ivory hover:bg-gold text-stone-800 hover:text-white font-semibold px-8 py-4 rounded-lg border border-stone-200 transition-colors shadow-md"
           >
             <span className="text-xs uppercase tracking-widest">Request Quote</span>
             <ArrowRight className="w-4 h-4" />
@@ -213,30 +213,30 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 2.1 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto mt-20 border-t border-zinc-900/80 pt-10"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto mt-20 border-t border-stone-200/80 pt-10"
         >
           <div className="flex flex-col items-center text-center group">
             <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold mb-3.5 border border-gold/20 group-hover:bg-gold/20 transition-colors">
               <Award className="w-5 h-5" />
             </div>
-            <h3 className="font-serif italic font-semibold text-zinc-100 text-base tracking-wide mb-1.5">Authentic Flavors</h3>
-            <p className="text-xs text-zinc-500 max-w-xs leading-relaxed">Centuries-old recipes blended in-house with handpicked organic spices.</p>
+            <h3 className="font-serif italic font-semibold text-stone-850 text-base tracking-wide mb-1.5">Authentic Flavors</h3>
+            <p className="text-xs text-stone-500 max-w-xs leading-relaxed">Centuries-old recipes blended in-house with handpicked organic spices.</p>
           </div>
 
           <div className="flex flex-col items-center text-center group">
             <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold mb-3.5 border border-gold/20 group-hover:bg-gold/20 transition-colors">
               <ShieldCheck className="w-5 h-5" />
             </div>
-            <h3 className="font-serif italic font-semibold text-zinc-100 text-base tracking-wide mb-1.5">Pure Veg & Pure Purity</h3>
-            <p className="text-xs text-zinc-500 max-w-xs leading-relaxed">Strict FSSAI standards, specialized vegetarian setups, separate preparations.</p>
+            <h3 className="font-serif italic font-semibold text-stone-850 text-base tracking-wide mb-1.5">Pure Veg & Pure Purity</h3>
+            <p className="text-xs text-stone-500 max-w-xs leading-relaxed">Strict FSSAI standards, specialized vegetarian setups, separate preparations.</p>
           </div>
 
           <div className="flex flex-col items-center text-center group">
             <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold mb-3.5 border border-gold/20 group-hover:bg-gold/20 transition-colors">
               <Flame className="w-5 h-5" />
             </div>
-            <h3 className="font-serif italic font-semibold text-zinc-100 text-base tracking-wide mb-1.5">Artisanal Hospitality</h3>
-            <p className="text-xs text-zinc-500 max-w-xs leading-relaxed">Luxury silverware presentation, live culinary theaters, and elite services.</p>
+            <h3 className="font-serif italic font-semibold text-stone-850 text-base tracking-wide mb-1.5">Artisanal Hospitality</h3>
+            <p className="text-xs text-stone-500 max-w-xs leading-relaxed">Luxury silverware presentation, live culinary theaters, and elite services.</p>
           </div>
         </motion.div>
       </div>
